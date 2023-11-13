@@ -49,6 +49,19 @@ public class CauzaService implements ICauzaService {
         return cauza.get();
     }
 
+    @Override
+    public List<Cauza> findAllByUser(User user)  throws NotFoundException{
+        Ensure.NotNull(user);
+        List<Cauza> causesOFUser = new ArrayList<>();
+        List<Cauza> allCauses = cauzaRepository.findAll();
+        for (Cauza cauza: allCauses){
+            if (user.getCauze().contains(cauza)){
+                causesOFUser.add(cauza);
+            }
+        }
+        return causesOFUser;
+    }
+
     public void delete(Long id) throws NotFoundException {
         Ensure.NotNull(id);
 
@@ -113,26 +126,6 @@ public class CauzaService implements ICauzaService {
         return (List<Cauza>) resultList;
     }
 
-    public void like(Long cauzaId, Long userId) throws NotFoundException {
-        Ensure.NotNull(cauzaId);
-        Ensure.NotNull(userId);
-
-        Optional<Cauza> cauzaOptional = cauzaRepository.findById(cauzaId);
-        if(cauzaOptional.isEmpty())
-            throw new NotFoundException("Case not found");
-        Cauza cauza = cauzaOptional.get();
-        if(cauza.getSustinatori().contains(userId)) {//unlike
-            cauza.getSustinatori().removeIf(id -> id.equals(userId));
-            cauzaRepository.save(cauza);
-            System.out.println("unlike");
-        }
-        else {//apreciere
-            cauza.getSustinatori().add(userId);
-            cauzaRepository.save(cauza);
-            System.out.println("like");
-        }
-    }
-
     @Override
     public void donate(Long cauzaId, Integer sum) throws NotFoundException {
         Ensure.NotNull(cauzaId);
@@ -145,6 +138,4 @@ public class CauzaService implements ICauzaService {
         cauza.setSumaStransa(cauza.getSumaStransa() + sum);
         cauzaRepository.save(cauza);
     }
-
-
 }

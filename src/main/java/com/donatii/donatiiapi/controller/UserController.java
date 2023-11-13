@@ -65,18 +65,6 @@ public class UserController {
         }
     }
 
-    @PutMapping("/like/{user_id}/{cauza_id}")
-    public ResponseEntity<Object> like(@PathVariable("user_id") Long user_id, @PathVariable("cauza_id") Long cauza_id) {
-        try {
-            userService.like(user_id, cauza_id);
-            cauzaService.like(cauza_id, user_id);
-            return ResponseEntity.ok().body("Like updated!");
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
     @PutMapping("/resources/{user_id}/{coins}/{level}")
     public ResponseEntity<Object> updateResources(@PathVariable("user_id") Long user_id,
                                                   @PathVariable("coins") Long coins,

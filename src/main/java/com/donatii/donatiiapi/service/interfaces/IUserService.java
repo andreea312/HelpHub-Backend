@@ -47,13 +47,6 @@ public interface IUserService {
     User findById(Long id) throws NotFoundException;
 
     /**
-     * Like
-     * @param userId Identificator User
-     * @param cauzaId Identificator Cauza
-     */
-    void like(Long userId, Long cauzaId) throws NotFoundException;
-
-    /**
      * Salveaza un user
      *
      * @param user User
@@ -62,7 +55,7 @@ public interface IUserService {
     User save(User user);
 
     /**
-     * Gaseste un user dupa o cauza
+     * Sterge o cauza a unui user
      * @param cauza Cauza
      */
     void deleteCauzaFromUser(Cauza cauza) throws NotFoundException;

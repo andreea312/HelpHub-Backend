@@ -1,6 +1,7 @@
 package com.donatii.donatiiapi.service.interfaces;
 
 import com.donatii.donatiiapi.model.Cauza;
+import com.donatii.donatiiapi.model.User;
 import com.donatii.donatiiapi.service.exceptions.EmptyObjectException;
 import com.donatii.donatiiapi.service.exceptions.NotFoundException;
 
@@ -20,6 +21,13 @@ public interface ICauzaService {
      * @return Cauza
      */
     Cauza findById(Long id) throws NotFoundException;
+
+    /**
+     * Gaseste toate cauzele unui user
+     * @param user User
+     * @return Lista de cauze
+     */
+    List<Cauza> findAllByUser(User user) throws NotFoundException;
 
     /**
      * Sterge cauza
@@ -57,13 +65,6 @@ public interface ICauzaService {
      * @return Lista de cauze
      */
     List<Cauza> filter(String locatie, Integer sumMin, Integer sumMax, Boolean rezolvate, Boolean adaposturi);
-
-    /**
-     * Like
-     * @param cauzaId Identificator Cauza
-     * @param userId Identificator User
-     */
-    void like(Long cauzaId, Long userId) throws NotFoundException;
 
     /**
      * Donate

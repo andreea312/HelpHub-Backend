@@ -80,26 +80,6 @@ public class UserService implements IUserService {
         return userOptional.get();
     }
 
-    public void like(Long userId, Long cauzaId) throws NotFoundException {
-        Ensure.NotNull(userId);
-        Ensure.NotNull(cauzaId);
-
-        Optional<User> userOptional = userRepository.findById(userId);
-        if(userOptional.isEmpty())
-            throw new NotFoundException("User not found");
-        User user = userOptional.get();
-        if(user.getSustineri().contains(cauzaId)) {//unlike
-            user.getSustineri().removeIf(id -> id.equals(cauzaId));
-            save(user);
-            System.out.println("unlike");
-        }
-        else {//apreciere
-            user.getSustineri().add(cauzaId);
-            save(user);
-            System.out.println("like");
-        }
-    }
-
     public User save(User user) {
         Ensure.NotNull(user);
 

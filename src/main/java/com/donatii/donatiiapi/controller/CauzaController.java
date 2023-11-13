@@ -83,6 +83,18 @@ public class CauzaController {
         }
     }
 
+    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> findAllByUser(@PathVariable("userId") Long userId) {
+        try {
+            User user = userService.findById(userId);
+            List<Cauza> cauze = cauzaService.findAllByUser(user);
+            return ResponseEntity.ok().body(cauze);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Cauza cauza) {
         try {
