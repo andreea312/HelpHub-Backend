@@ -82,6 +82,17 @@ public class CauzaController {
         }
     }
 
+    @GetMapping(value = "/sorted", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> findAllSorted() {
+        try {
+            List<Cauza> cauze = cauzaService.findAllSorted();
+            return ResponseEntity.ok().body(cauze);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findAllByUser(@PathVariable("userId") Long userId) {
         try {

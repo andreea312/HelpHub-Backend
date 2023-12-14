@@ -79,4 +79,18 @@ public interface IUserService {
      * @param coins Monede
      */
     void updateResources(Long userId, Long coins) throws NotFoundException;
+
+    /**
+     * Seteaza achievementurile unui user
+     * @param user
+     * @return lista de achievementuri deblocate de user dupa o donatie
+     */
+    public List<Achievement> unlockAchievements(User user);
+
+    /**
+     * Top-ul userilor dupa puncte
+     * @param numberOfUsers cati useri se vor in top
+     * @return top ul userilor
+     */
+    public List<User> getTopUsersByPoints(int numberOfUsers) ;
 }

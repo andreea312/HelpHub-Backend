@@ -139,6 +139,10 @@ public class UserService implements IUserService {
         return achievementList;
     }
 
+    public List<User> getTopUsersByPoints(int numberOfUsers) {
+        return userRepository.findTopNUsersByOrderByPointsDesc(numberOfUsers);
+    }
+
     @Override
     public void updateResources(Long userId, Long points) throws NotFoundException {
         Optional<User> userOptional = userRepository.findById(userId);

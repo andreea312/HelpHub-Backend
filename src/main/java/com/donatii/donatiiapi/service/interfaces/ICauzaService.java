@@ -42,6 +42,12 @@ public interface ICauzaService {
     List<Cauza> findAll();
 
     /**
+     * Pune cauzele completate la final si cele necompletate le lasa cum erau
+     * @return lista de cauze sortata
+     */
+    List<Cauza> findAllSorted();
+
+    /**
      * Salveaza o poza
      * @param s Url poza
      * @param id Identificator

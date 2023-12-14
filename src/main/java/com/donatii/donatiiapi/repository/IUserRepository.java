@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,9 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.cauze c WHERE c.id = :cauzaId")
     Optional<User> findUserByCauzaId(@Param("cauzaId") Long cauzaId);
+
+
+    @Query( "SELECT u FROM User u ORDER BY u.points DESC")
+    List<User> findTopNUsersByOrderByPointsDesc(int numberOfUsers);
 }
 

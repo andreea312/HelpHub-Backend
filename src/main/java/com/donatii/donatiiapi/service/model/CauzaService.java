@@ -14,10 +14,8 @@ import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CauzaService implements ICauzaService {
@@ -72,6 +70,32 @@ public class CauzaService implements ICauzaService {
 
     public List<Cauza> findAll() {
         return cauzaRepository.findAll();
+    }
+
+    public List<Cauza> findAllSorted() {
+        List<Cauza> sortedList = new ArrayList<>();
+
+        // Filter the elements having sumaMinima != sumaStransa
+        List<Cauza> differentSumList = cauzaRepository.findAll().stream()
+                .filter(cauza -> cauza.getSumaMinima() != null && cauza.getSumaStransa() != null && !cauza.getSumaMinima().equals(cauza.getSumaStransa()))
+                .collect(Collectors.toList());
+
+        // Filter the elements having sumaMinima == sumaStransa
+        List<Cauza> sameSumList = cauzaRepository.findAll().stream()
+                .filter(cauza -> cauza.getSumaMinima() != null && cauza.getSumaStransa() != null && cauza.getSumaMinima().equals(cauza.getSumaStransa()))
+                .collect(Collectors.toList());
+
+        // Add elements having sumaMinima != sumaStransa to the sorted list
+        sortedList.addAll(differentSumList);
+
+        // Sort elements having sumaMinima == sumaStransa based on other criteria (if needed)
+        // For example, sorting by ID or any other property
+        sameSumList.sort(Comparator.comparingLong(Cauza::getId));
+
+        // Add elements having sumaMinima == sumaStransa to the sorted list
+        sortedList.addAll(sameSumList);
+
+        return sortedList;
     }
 
     public void savePicture(String s, Long id) throws NotFoundException, EmptyObjectException {

@@ -1,15 +1,19 @@
 package com.donatii.donatiiapi.controller;
 
 import com.donatii.donatiiapi.model.Achievement;
+import com.donatii.donatiiapi.model.Cauza;
 import com.donatii.donatiiapi.model.User;
 import com.donatii.donatiiapi.service.interfaces.IAchievementService;
 import com.donatii.donatiiapi.service.interfaces.ICauzaService;
 import com.donatii.donatiiapi.service.interfaces.IUserService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -74,6 +78,17 @@ public class UserController {
         try {
             userService.updateResources(user_id, points);
             return ResponseEntity.ok().body("Resources updated!");
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/top", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> topUsers() {
+        try {
+            List<User> users =  userService.getTopUsersByPoints(5);
+            return ResponseEntity.ok().body(users);
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
