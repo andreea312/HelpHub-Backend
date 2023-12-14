@@ -35,7 +35,6 @@ public class CauzaService implements ICauzaService {
     public Cauza save(Cauza cauza) {
         Ensure.NotNull(cauza);
 
-        cauza.setSustinatori(new HashSet<>());
         return cauzaRepository.save(cauza);
     }
 

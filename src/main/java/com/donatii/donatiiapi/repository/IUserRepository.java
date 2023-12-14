@@ -17,18 +17,5 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.cauze c WHERE c.id = :cauzaId")
     Optional<User> findUserByCauzaId(@Param("cauzaId") Long cauzaId);
-
-    @Query("SELECT COUNT(u) > 0 FROM User u JOIN u.sustineri s WHERE s = :cauzaId AND u.id = :userId")
-    boolean existsSustinere(@Param("userId") Long userId, @Param("cauzaId") Long cauzaId);
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO sustineri(user_id, cauza_id) SELECT :userId, :cauzaId FROM cauze c WHERE c.id = :cauzaId", nativeQuery = true)
-    void addSustinere(@Param("userId") Long userId, @Param("cauzaId") Long cauzaId);
-
-    @Transactional
-    @Modifying
-    @Query(value = "DELETE FROM sustineri WHERE user_id = :userId AND cauza_id = :cauzaId", nativeQuery = true)
-    void deleteSustinere(@Param("userId") Long userId, @Param("cauzaId") Long cauzaId);
-
 }
 

@@ -5,26 +5,30 @@ import com.donatii.donatiiapi.repository.IUserRepository;
 import com.donatii.donatiiapi.service.exceptions.EmptyObjectException;
 import com.donatii.donatiiapi.service.exceptions.MyException;
 import com.donatii.donatiiapi.service.exceptions.NotFoundException;
+import com.donatii.donatiiapi.service.interfaces.IAchievementService;
 import com.donatii.donatiiapi.service.interfaces.IUserService;
 import com.donatii.donatiiapi.utils.Ensure;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService implements IUserService {
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final IAchievementService achievementService;
+
     @Autowired
-    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder, IAchievementService achievementService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.achievementService = achievementService;
     }
 
     public User login(String email, String parola) throws NotFoundException, EmptyObjectException {
@@ -101,30 +105,47 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Pair<Long, Integer> donate(Long userId, Integer sum, String currency, Cauza cauza) throws NotFoundException {
+    public List<Achievement> donate(Long userId, Integer sum, String currency, Cauza cauza) throws NotFoundException {
         Optional<User> userOptional = userRepository.findById(userId);
         if(userOptional.isEmpty())
             throw new NotFoundException("User not found");
         User user = userOptional.get();
         Donatie donatie = new Donatie(0L, sum, LocalDateTime.now(), currency, cauza.getId(), cauza.getTitlu());
         user.getDonatii().add(donatie);
-        Long coins = 3L * sum;
-        Integer level = sum / 5;
-        user.setCoins(user.getCoins() + coins);
-        user.setLevel(user.getLevel() + level);
+        Long points = 3L* sum ;
+        if(user.getNrDonations() == null)
+            user.setNrDonations(0);
+        if(user.getPoints() == null)
+            user.setPoints(0L);
+        user.setNrDonations(user.getNrDonations()+1);
+        user.setPoints(user.getPoints() + points);
+        return unlockAchievements(user);
+    }
+
+    public List<Achievement> unlockAchievements(User user){
+        List<Achievement> achievementList = new ArrayList<Achievement>(){};
+        for (Achievement achievement: achievementService.getAchievements()) {
+            if(!user.getAchievements().contains(achievement)) {
+                if (achievement.getPoints_required() != -1 && achievement.getPoints_required() <= user.getPoints()) {
+                    achievementList.add(achievement);
+                    user.getAchievements().add(achievement);
+                } else if (achievement.getNr_donations_required() != -1 && achievement.getNr_donations_required() <= user.getNrDonations()) {
+                    achievementList.add(achievement);
+                    user.getAchievements().add(achievement);
+                }
+            }
+        }
         save(user);
-        return Pair.of(coins, level);
+        return achievementList;
     }
 
     @Override
-    public void updateResources(Long userId, Long coins, Integer level) throws NotFoundException {
+    public void updateResources(Long userId, Long points) throws NotFoundException {
         Optional<User> userOptional = userRepository.findById(userId);
         if(userOptional.isEmpty())
             throw new NotFoundException("User not found");
         User user = userOptional.get();
-        user.setCoins(user.getCoins() + coins);
-        if(level != null)
-            user.setLevel(user.getLevel() + level);
+        user.setPoints(user.getPoints() + points);
         save(user);
     }
 }

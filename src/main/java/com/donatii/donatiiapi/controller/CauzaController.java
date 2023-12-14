@@ -41,7 +41,6 @@ public class CauzaController {
     public ResponseEntity<Object> save(@PathVariable("userId") Long userId, @RequestBody Cauza cauza) {
         try {
             try {
-                cauza.setSustinatori(new HashSet<>());
                 cauza.setPoze(new HashSet<>());
 
                 User user = userService.findById(userId);
@@ -183,8 +182,7 @@ public class CauzaController {
                                          @PathVariable("currency") String currency) {
         try {
             cauzaService.donate(cauzaId, sum);
-            Pair<Long, Integer> res = userService.donate(userId, sum, currency, cauzaService.findById(cauzaId));
-            return ResponseEntity.ok().body(res);
+            return ResponseEntity.ok().body(userService.donate(userId, sum, currency, cauzaService.findById(cauzaId)));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

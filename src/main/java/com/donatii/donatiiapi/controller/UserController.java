@@ -1,6 +1,8 @@
 package com.donatii.donatiiapi.controller;
 
+import com.donatii.donatiiapi.model.Achievement;
 import com.donatii.donatiiapi.model.User;
+import com.donatii.donatiiapi.service.interfaces.IAchievementService;
 import com.donatii.donatiiapi.service.interfaces.ICauzaService;
 import com.donatii.donatiiapi.service.interfaces.IUserService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final IUserService userService;
     private final ICauzaService cauzaService;
+
     @Autowired
-    public UserController(IUserService userService, ICauzaService cauzaService) {
+    public UserController(IUserService userService, ICauzaService cauzaService ) {
         this.userService = userService;
         this.cauzaService = cauzaService;
     }
@@ -65,12 +68,11 @@ public class UserController {
         }
     }
 
-    @PutMapping("/resources/{user_id}/{coins}/{level}")
+    @PutMapping("/resources/{user_id}/{points}")
     public ResponseEntity<Object> updateResources(@PathVariable("user_id") Long user_id,
-                                                  @PathVariable("coins") Long coins,
-                                                  @PathVariable(value = "level", required = false) Integer level) {
+                                                  @PathVariable("points") Long points) {
         try {
-            userService.updateResources(user_id, coins, level);
+            userService.updateResources(user_id, points);
             return ResponseEntity.ok().body("Resources updated!");
         }
         catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.donatii.donatiiapi.service.interfaces;
 
+import com.donatii.donatiiapi.model.Achievement;
 import com.donatii.donatiiapi.model.Cauza;
 import com.donatii.donatiiapi.model.User;
 import com.donatii.donatiiapi.service.exceptions.EmptyObjectException;
@@ -7,6 +8,7 @@ import com.donatii.donatiiapi.service.exceptions.MyException;
 import com.donatii.donatiiapi.service.exceptions.NotFoundException;
 import org.springframework.data.util.Pair;
 
+import java.util.List;
 import java.util.Set;
 
 public interface IUserService {
@@ -69,13 +71,12 @@ public interface IUserService {
      * @param cauza    Cauza
      * @return
      */
-    Pair<Long, Integer> donate(Long userId, Integer sum, String currency, Cauza cauza) throws NotFoundException;
+    List<Achievement> donate(Long userId, Integer sum, String currency, Cauza cauza) throws NotFoundException;
 
     /**
      * Updateaza resursele unui user
      * @param userId Identificator User
      * @param coins Monede
-     * @param level Nivel
      */
-    void updateResources(Long userId, Long coins, Integer level) throws NotFoundException;
+    void updateResources(Long userId, Long coins) throws NotFoundException;
 }

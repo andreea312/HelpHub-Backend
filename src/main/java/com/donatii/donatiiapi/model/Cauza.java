@@ -42,19 +42,6 @@ public class Cauza {
     protected Integer sumaStransa;
     protected String moneda;
 
-    @JsonIgnore
-    @ElementCollection
-    @CollectionTable(name="sustinatori", joinColumns=@JoinColumn(name="cauza_id"))
-    @Column(name="user_id")
-    private Set<Long> sustinatori = new HashSet<>();
-
-    @Transient
-    private Integer nrSustinatori;
-
-    public Integer getNrSustinatori() {
-        return this.sustinatori.size();
-    }
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinTable(name = "cauze_poze",
             joinColumns = @JoinColumn(name = "cauza_id"),

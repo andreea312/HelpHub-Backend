@@ -38,17 +38,20 @@ public class User {
     private String parola;
     private String fullName;
     private GenderType gender;
-    private Long coins;
-    private Integer level;
-
-    @ElementCollection
-    @CollectionTable(name="sustineri", joinColumns=@JoinColumn(name="user_id"))
-    @Column(name="cauza_id")
-    private Set<Long> sustineri;
+    private Long points;
+    private Integer nrDonations;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Donatie> donatii;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Cauza> cauze;
+
+    @ManyToMany
+    @JoinTable(
+        name ="user_achievement",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns =@JoinColumn(name = "achievement_id")
+    )
+    private Set<Achievement> achievements;
 }
