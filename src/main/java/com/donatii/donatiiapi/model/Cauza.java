@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DiscriminatorFormula;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -47,4 +48,16 @@ public class Cauza {
             joinColumns = @JoinColumn(name = "cauza_id"),
             inverseJoinColumns = @JoinColumn(name = "poze_id"))
     private Set<Poza> poze;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cauza cauza = (Cauza) o;
+        return id.equals(cauza.id);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
