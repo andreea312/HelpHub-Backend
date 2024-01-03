@@ -27,8 +27,8 @@ public class User {
             allocationSize = 1
     )
     @GeneratedValue(
-        strategy = GenerationType.SEQUENCE,
-        generator = "user_sequence"
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
     )
     private Long id;
     private String username;
@@ -49,9 +49,9 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-        name ="user_achievement",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns =@JoinColumn(name = "achievement_id")
+            name = "user_achievement",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "achievement_id")
     )
     private Set<Achievement> achievements;
 }

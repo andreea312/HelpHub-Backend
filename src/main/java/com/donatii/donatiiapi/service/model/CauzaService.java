@@ -56,6 +56,7 @@ public class CauzaService implements ICauzaService {
                 causesOFUser.add(cauza);
             }
         }
+        //causesOFUser.addAll(user.getCauze());
         return causesOFUser;
     }
 
