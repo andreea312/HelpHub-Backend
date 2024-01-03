@@ -114,7 +114,6 @@
 2024-01-03T22:02:16.265+02:00 DEBUG 9172 --- [http-nio-127.0.0.1-8081-exec-6] org.hibernate.SQL                        : insert into donatii (cauza_id, cauza_titlu, data, moneda, suma, id) values (?, ?, ?, ?, ?, ?)
 2024-01-03T22:02:16.268+02:00 DEBUG 9172 --- [http-nio-127.0.0.1-8081-exec-6] org.hibernate.SQL                        : update users set email=?, full_name=?, gender=?, nr_donations=?, points=?, username=? where id=?
 2024-01-03T22:02:16.270+02:00 DEBUG 9172 --- [http-nio-127.0.0.1-8081-exec-6] org.hibernate.SQL                        : insert into users_donatii (user_id, donatii_id) values (?, ?)
-<<<<<<< HEAD
 2024-01-03T22:10:18.833+02:00  INFO 9172 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-01-03T22:10:18.844+02:00  INFO 9172 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-01-03T22:10:18.852+02:00  INFO 9172 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
@@ -3853,7 +3852,6 @@ org.springframework.web.multipart.MultipartException: Current request is not a m
 2024-01-03T23:17:01.200+02:00  INFO 1932 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-01-03T23:17:01.202+02:00  INFO 1932 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-01-03T23:17:01.214+02:00  INFO 1932 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-=======
 2024-01-03T22:42:03.593+02:00  INFO 23912 --- [main] c.d.donatiiapi.DonatiiApiApplication     : Starting DonatiiApiApplication using Java 18.0.2 with PID 23912 (C:\Users\andre\Desktop\Proiect colectiv\DEMO3\backend-help-hub\build\classes\java\main started by andre in C:\Users\andre\Desktop\Proiect colectiv\DEMO3\backend-help-hub)
 2024-01-03T22:42:03.601+02:00  INFO 23912 --- [main] c.d.donatiiapi.DonatiiApiApplication     : No active profile set, falling back to 1 default profile: "default"
 2024-01-03T22:42:04.690+02:00  INFO 23912 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
@@ -4222,4 +4220,3 @@ org.springframework.web.multipart.MultipartException: Current request is not a m
 2024-01-03T23:04:33.549+02:00  INFO 2512 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-01-03T23:04:33.551+02:00  INFO 2512 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-01-03T23:04:33.566+02:00  INFO 2512 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
->>>>>>> 2391145d49fbe37bb4d20ba71c76a39f085908f6
