@@ -59,10 +59,10 @@ public class UserService implements IUserService {
             throw new NotFoundException("User not found");
         User userToUpdate = userOptional.get();
         userToUpdate.setUsername(user.getUsername());
-        userToUpdate.setParola(user.getParola());
-        userToUpdate.setEmail(user.getEmail());
+        //userToUpdate.setParola(user.getParola());
+        //userToUpdate.setEmail(user.getEmail());
         userToUpdate.setFullName(user.getFullName());
-        userToUpdate.setGender(user.getGender());
+        //userToUpdate.setGender(user.getGender());
         save(userToUpdate);
     }
 

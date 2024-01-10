@@ -87,7 +87,7 @@ public class UserController {
     @GetMapping(value = "/top", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> topUsers() {
         try {
-            List<User> users =  userService.getTopUsersByPoints(5);
+            List<User> users =  userService.getTopUsersByPoints(10);
             return ResponseEntity.ok().body(users);
         }
         catch (Exception e) {
