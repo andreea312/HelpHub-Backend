@@ -94,4 +94,15 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping(value = "/email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
+        try {
+            User user = userService.GetUserByEmail(email);
+            return ResponseEntity.ok().body(user);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

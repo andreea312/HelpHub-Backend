@@ -84,6 +84,16 @@ public class UserService implements IUserService {
         return userOptional.get();
     }
 
+    public User GetUserByEmail(String email) throws NotFoundException, EmptyObjectException {
+        Ensure.NotNullOrEmpty(email);
+
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if(user.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
+        return user.get();
+    }
+
     public User save(User user) {
         Ensure.NotNull(user);
 

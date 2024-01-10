@@ -93,4 +93,13 @@ public interface IUserService {
      * @return top ul userilor
      */
     public List<User> getTopUsersByPoints(int numberOfUsers) ;
+
+    /**
+     * Gaseste un user dupa email-ul lui
+     * @param email
+     * @return userul dupa email
+     * @throws NotFoundException
+     * @throws EmptyObjectException
+     */
+    public User GetUserByEmail(String email) throws NotFoundException, EmptyObjectException;
 }
