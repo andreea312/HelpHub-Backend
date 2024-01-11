@@ -62,15 +62,13 @@ public interface ICauzaService {
     void update(Long id, Cauza cauza) throws NotFoundException;
 
     /**
-     *
      * @param locatie
      * @param sumMin
      * @param sumMax
      * @param rezolvate
-     * @param adaposturi
      * @return Lista de cauze
      */
-    List<Cauza> filter(String locatie, Integer sumMin, Integer sumMax, Boolean rezolvate, Boolean adaposturi);
+    List<Cauza> filter(String locatie, Integer sumMin, Integer sumMax, Boolean rezolvate);
 
     /**
      * Donate

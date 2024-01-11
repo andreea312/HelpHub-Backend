@@ -50,6 +50,15 @@ public class UserService implements IUserService {
         return save(user);
     }
 
+    public User findUserOfCauza(Cauza cauza) throws NotFoundException {
+        for(User user : userRepository.findAll()){
+            if (user.getCauze().contains(cauza)){
+                return user;
+            }
+        }
+        return null;
+    }
+
     public void update(Long id, User user) throws NotFoundException {
         Ensure.NotNull(id);
         Ensure.NotNull(user);

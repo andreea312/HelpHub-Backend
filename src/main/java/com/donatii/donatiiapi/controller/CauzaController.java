@@ -132,10 +132,9 @@ public class CauzaController {
     public ResponseEntity<Object> filter(@RequestParam String locatie,
                                          @RequestParam Integer sumMin,
                                          @RequestParam Integer sumMax,
-                                         @RequestParam Boolean rezolvate,
-                                         @RequestParam Boolean adaposturi) {
+                                         @RequestParam Boolean rezolvate) {
         try {
-            List<Cauza> cauze = cauzaService.filter(locatie, sumMin, sumMax, rezolvate, adaposturi);
+            List<Cauza> cauze = cauzaService.filter(locatie, sumMin, sumMax, rezolvate);
             return ResponseEntity.ok().body(cauze);
 
         }

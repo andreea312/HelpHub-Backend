@@ -61,6 +61,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/userofcauza/{id}")
+    public ResponseEntity<Object> getUserOfCauza(@PathVariable("id") Long id) {
+        try {
+            Cauza cauza = cauzaService.findById(id);
+            User user = userService.findUserOfCauza(cauza);
+            return ResponseEntity.ok().body(user);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
         try {

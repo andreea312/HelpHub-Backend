@@ -124,7 +124,7 @@ public class CauzaService implements ICauzaService {
         cauzaRepository.save(cauza);
     }
 
-    public List<Cauza> filter(String locatie, Integer sumMin, Integer sumMax, Boolean rezolvate, Boolean adaposturi) {
+    public List<Cauza> filter(String locatie, Integer sumMin, Integer sumMax, Boolean rezolvate) {
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<? extends Cauza> query = criteriaBuilder.createQuery(Cauza.class);
         final Root<? extends Cauza> cauza = query.from(Cauza.class);

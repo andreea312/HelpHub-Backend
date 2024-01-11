@@ -35,6 +35,8 @@ public interface IUserService {
      */
     void update(Long id, User user) throws NotFoundException;
 
+    User findUserOfCauza(Cauza cauza) throws NotFoundException;
+
     /**
      * Sterge un user
      * @param id Identificator User
