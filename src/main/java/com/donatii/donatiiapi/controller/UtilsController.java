@@ -1,5 +1,6 @@
 package com.donatii.donatiiapi.controller;
 
+import com.donatii.donatiiapi.model.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RestController
 @Controller
@@ -25,7 +27,7 @@ public class UtilsController {
         ByteArrayResource inputStream;
         try {
             inputStream = new ByteArrayResource(Files.readAllBytes(Paths.get(
-                    "assets/images/"+tip+"/"+url+".png"
+                    "assets/images/" + tip + "/" + url + ".png"
             )));
             return ResponseEntity
                     .status(HttpStatus.OK)
