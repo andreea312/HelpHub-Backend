@@ -1,1 +1,2 @@
-# Backend of HelpHub web application, made using Java Spring for efficient coding and MySQL for the database.
+# Backend of HelpHub web application
+Made using Java Spring for efficient coding and MySQL for the database.
